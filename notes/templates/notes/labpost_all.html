@@ -1,0 +1,166 @@
+{% extends "notes/base.html" %}
+{% block content %}
+
+<div class="card p-3 pt-4">
+    <div class="container">
+        <div class="row">
+        
+            <div class="input-group-prepend ml-2 mr-2">
+                <button class="btn btn-primary btn-md m-0 px-3 py-2 z-depth-0 dropdown-toggle" type="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Branch</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'branch_lab' "CSE" %}">CSE</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "ECE" %}">ECE</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "EEE" %}">EEE</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "MECH" %}">MECH</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "CV" %}">CV</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "BCA" %}">BCA</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "BBA" %}">BBA</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "MCA" %}">MCA</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "MBA" %}">MBA</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "LLB" %}">LLB</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "LLM" %}">LLM</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "B-ARCH" %}">B-ARCH</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "BBA-HEM" %}">BBA-HEM</a>
+                    <a class="dropdown-item" href="{% url 'branch_lab' "B-DES" %}">B-DES</a>
+                </div>
+            </div>
+            <div class="input-group-prepend ml-2 mr-2">
+                <button class="btn btn-primary btn-md m-0 px-3 py-2 z-depth-0 dropdown-toggle" type="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Semester</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'semester_lab' 1 %}">1</a>
+                    <a class="dropdown-item" href="{% url 'semester_lab' 2 %}">2</a>
+                    <a class="dropdown-item" href="{% url 'semester_lab' 3 %}">3</a>
+                    <a class="dropdown-item" href="{% url 'semester_lab' 4 %}">4</a>
+                    <a class="dropdown-item" href="{% url 'semester_lab' 5 %}">5</a>
+                    <a class="dropdown-item" href="{% url 'semester_lab' 6 %}">6</a>
+                    <a class="dropdown-item" href="{% url 'semester_lab' 7 %}">7</a>
+                    <a class="dropdown-item" href="{% url 'semester_lab' 8 %}">8</a>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<br>
+<!--Section: Cards-->
+<section class="text-center">
+
+    <!--Grid row-->
+    <div class="row mb-4 wow fadeIn">
+        {% for post in posts.all  %}
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+
+            <div class="card">
+
+                <!--Card image-->
+                <div class="view overlay p-2 mt-2">
+                    <img responsive
+                        src="https://rampages.us/pharmaceutical-engineering/wp-content/themes/egr-faculty/images/mech-icon.png"
+                        class="card-img-top px-5" alt="">
+                    <a href="{% url 'full_post' post.id %}">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card content-->
+                <div class="card-body">
+                    <!--Title-->
+                    <h4 class="card-title">{{post.title}}</h4>
+                    <!--Text-->
+                    <p class="card-text">{{post.description|truncatechars:50}}</p>
+                    <p class="text-muted small">Posted by <a
+                            href="{% url 'user_posts' post.author.username%}">{{ post.author|upper}} </a>on
+                        {{ post.date_posted|date:"F d, Y"}}</p>
+
+                </div>
+
+            </div>
+            <!--/.Card-->
+
+
+        </div>
+        <!--Grid column-->
+        {% empty %}
+        <p class="text-center font-bold">No posts yet, Go ahead create one!</p>
+        {% endfor %}
+
+
+    </div>
+    <!--Grid row-->
+
+    <!--Pagination-->
+
+    <nav class="d-flex justify-content-center wow fadeIn">
+        <ul class="pagination pg-blue">
+
+
+            {% if is_paginated %}
+            {% if not page_obj.has_previous %}
+            <li class="page-item disabled">
+                <a class="page-link" href="" aria-label=" Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1">First</a>
+            </li>
+            <li class="page-item ">
+                <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <li class="page-item active">
+                <a class="page-link" href="?page={{num}}">{{num}}</a>
+            </li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{num}}">{{num}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{page_obj.paginator.num_pages}}">Last</a>
+            </li>
+            {% endif %}
+            {% if not page_obj.has_next %}
+            <li class="page-item disabled">
+                <a class="page-link" href="" aria-label=" Previous">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+            {% endif %}
+            {% endif %}
+
+            <!--Pagination-->
+        </ul>
+    </nav>
+
+</section>
+
+<!--Section: Cards-->
+{% endblock %}

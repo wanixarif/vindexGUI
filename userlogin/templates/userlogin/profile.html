@@ -1,0 +1,79 @@
+{% extends "notes/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    .imgcontainer {
+        height: 100%;
+        align-content: center;
+    }
+
+    .image_outer_container {
+        margin-top: auto;
+        margin-bottom: auto;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .image_inner_container {
+        border-radius: 50%;
+        padding: 5px;
+        background: #833ab4;
+        background: -webkit-linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4);
+        background: linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4);
+    }
+
+    .image_inner_container img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        border: 5px solid white;
+    }
+</style>
+<div style="max-width: 600px;" class="card p-3 text-center ml-auto mr-auto">
+
+    <div class="media ">
+        <div class="imgcontainer ml-auto mr-auto">
+            <div class="d-flex justify-content-center h-100">
+                <div class="image_outer_container">
+
+                    <div class="image_inner_container">
+                        <img src="{{ user.profile.image.url }}"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="POST" enctype="multipart/form-data" class='md-form'>
+        {% csrf_token %}
+        <fieldset class="form-group text-center">
+            <div class="md-form text-center"><br>
+                {{ u_form.username }}
+                <label for="id_username">Username</label>
+            </div>
+            <div class="md-form">
+                <br>
+                {{ u_form.email }}
+                <label for="id_username">Email</label>
+                <br><br>
+            </div>
+            <div class="md-form">{{p_form}}</div>
+            
+
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+    </form>
+    <p><a href="{% url 'password_change' %}">Click here</a> to change your password.</p>
+</div>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script>
+    // $('#hint_id_username').attr("style", "visibility:hidden; height:0px;");
+    // $('#hint_id_password1').attr("style", "visibility:hidden; height:0px;");
+</script> -->
+{% endblock content %}

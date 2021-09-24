@@ -1,0 +1,15 @@
+{% extends "notes/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<br><br><br>
+<div class="card ml-auto mr-auto " style="max-width:430px;">
+    <!-- Default form login -->
+    <h3>Logged out successfully.</h3>
+    <p><a href="{% url 'login' %}">Log In</a></p>
+
+</div>
+
+<br><br><br>
+
+{% endblock content %}
