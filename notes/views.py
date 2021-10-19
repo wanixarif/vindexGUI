@@ -259,9 +259,15 @@ class BranchMaterialListView(ListView):
 
 
 def getTimestamp(request):
-    fileName = request.GET.get('fileName', None)
+
+    fileName = ".."+request.GET.get('fileName', None)
+    dirname = os.path.dirname(__file__)
+    filename = os.path.join(dirname, fileName)
+
     searchTerm = request.GET.get('searchTerm', None)
+
+    resp=getSubTimeStamp(filename,searchTerm)
     data = {
-        'is_taken': getSubTimeStamp(fileName,searchTerm)
+        'result': getSubTimeStamp(filename,searchTerm)
     }
     return JsonResponse(data)

@@ -58,32 +58,69 @@
     <br>
     <!--Grid row-->
 
-    <div class="card p-3 pt-5">
+    <div class="card  pt-5">
         <div class="row mb-4 wow fadeIn">
             <!--Grid column-->
             {% if filepost.file0  %}
-            <div class="container mt-5 pt-5">
+            <div class="container">
                 <div class="row">
                   <div class="col-md-8">
                     <div class="ratio ratio-16x9">
                         <video id='vidx' autoplay="autoplay" controls="controls" preload="preload">
-                            <source src="{{filepost.file0.url}}#t=500" type="video/mp4"></source>
+                            <source src="{{filepost.file0.url}}" type="video/mp4"></source>
                         </video>
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <input id="file_url" value="{{filepost.file0.url | vid_url}}" class="form-control" />
 
-                    <div class="input-group">
-                      <div class="form-outline">
-                        <input type="search" id="search_subs" value="hi" class="form-control" />
-                        <label class="form-label" for="searchSubs">Search</label>
-                      </div>
-                      <button type="button" class="btn btn-primary" onclick='greet()'>
-                        <i class="fas fa-search"></i>
-                      </button>
+                    <div class="row">
+
+                            <textarea style="width: 0rem; height:0rem; border:none;" class="p-0 form-control disabled"
+                                id="file_url">{{filepost.file0.url | vid_url}}</textarea>
+        
+                            <div class="form-inline d-flex  md-form form-md mt-0">
+                                <input type="search" id="search_subs" class="form-control form-control-sm  w-80"/>
+                                <button type="button" id="search_button" class="btn aqua-gradient btn-rounded btn-sm" >
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            
                     </div>
+                    <div class="row">
+
+                    <div class="container pl-0">
+                        <div class="card mt-2 mb-2 text-left">
+                        
+                        
+                        <div class="row">
+                            
+                            <div class="col-md-9">
+                            <div class="card-body">
+                        
+                            <!-- Title -->
+                            <h7 class="card-title">Card title</h7>
+                            <!-- Text -->
+                            <p class="card-text">Some      content.</p>
+                        
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                        <!-- Button -->
+                            <a id="play_btn_card" class="btn-floating btn-action mt-4 mdb-color lighten-3" style=" border-radius:50% ; color:white; padding:9px; "><i
+                            class="fa fa-chevron-right pl-1"></i></a>  
+                        </div>
+                        </div>
+                        
+                        
+                        </div>
+                        </div>
+                        <!-- Card -->
+
+                        <input id="search_result" value="loading" />
+                    </div>
+
                   </div>
+
                 </div>
                 
               </div>
@@ -97,33 +134,31 @@
 </section>
 <!--Section: Cards-->
 <script>
-    $("#search_subs").change(function () {
-      var searchTerm = $(this).val();
+    $("#search_button").click(function () {
+      var searchTerm = $("#search_subs").val();
       var fileName = $("#file_url").val();
+      $.ajax({
+        url: '/ajax/getTimestamp/',
+        data: {
+          'fileName': fileName,
+          'searchTerm':searchTerm
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log(data.result)
+          $("#search_result").attr("value",data.result)
+        }
+      });
       console.log(searchTerm,fileName);
 
-    //   $.ajax({
-    //     url: '/ajax/validate_username/',
-    //     data: {
-    //       'username': username
-    //     },
-    //     dataType: 'json',
-    //     success: function (data) {
-    //       if (data.is_taken) {
-    //         alert("A user with this username already exists.");
-    //       }
-    //     }
-    //   });
 
     });
+    $("#play_btn_card").click(function () {
+            document.getElementById("vidx").currentTime = 50;
+        }
+    );
   </script>
-<script>
     
-    function greet() {
-      console.log('Hey there clicker!');
-  }
-
-</script>
 {% endblock %}
 
 

@@ -36,18 +36,18 @@ def getSubTimeStamp(fname,search_term):
                 sentence_list.append(para)
         if not flag:
             if len(get_close_matches(search_term, list(word_list))) > 0 and num==0:
-                print('Not found try searching one of these:')
-                print(', '.join(get_close_matches(search_term, list(word_list))))
+                #print('Not found try searching one of these:')
+                #print(', '.join(get_close_matches(search_term, list(word_list))))
                 resp+='Not found try searching one of these:'+', '.join(get_close_matches(search_term, list(word_list)))
             elif num==0:
-                print("No matches or words close to the entered term found")
+                #print("No matches or words close to the entered term found")
                 resp+="No matches"
 
     if len(mult_occurences) > 1:
-        print("More than one occurence found:")
+        #print("More than one occurence found:")
         resp+="More than one occurence found:\n"
         for i in range(0, len(mult_occurences)):
-            print(i+1, ") ",sentence_list[i]," at ", mult_occurences[i],sep='')
+            #print(i+1, ") ",sentence_list[i]," at ", mult_occurences[i],sep='')
             resp+=str(i+1) + ") " + sentence_list[i] + " at " + mult_occurences[i] +"\n"
         # while isint:
         #     #Check if not a number
@@ -57,11 +57,11 @@ def getSubTimeStamp(fname,search_term):
         #         if occurence_number<len(mult_occurences) and occurence_number>=0:
         #             isint=0
         #         else:
-        #             print("Invalid choice")
+        #             #print("Invalid choice")
         #     except:
-        #         print("Invalid choice")
+        #         #print("Invalid choice")
     else:
-        print("Found at ",mult_occurences[0])
+        #print("Found at ",mult_occurences[0])
         resp+="Found at "+mult_occurences[0]
     # t = mult_occurences[occurence_number]
     # time = int(t[0:2])*3600 + int(t[3:5])*60 + int(t[6:])
