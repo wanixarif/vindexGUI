@@ -1,54 +1,7 @@
 {% extends "notes/base.html" %}
 {% block content %}<!--Section: Cards-->
 <section class="text-center">
-<div class="card p-3 pt-4">
-    <div class="container">
-        <div class="row text-center">
-            <h5 class="text-center">Showing all posts under course material uploads</h5>
-            <div class="input-group-prepend ml-2 mr-2 ">
-                <button class="btn btn-primary btn-md m-0 px-3 py-2 z-depth-0 dropdown-toggle" type="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Branch</button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'branch_material' "CSE" %}">CSE</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "ECE" %}">ECE</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "EEE" %}">EEE</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "MECH" %}">MECH</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "CV" %}">CV</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "BCA" %}">BCA</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "BBA" %}">BBA</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "MCA" %}">MCA</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "MBA" %}">MBA</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "LLB" %}">LLB</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "LLM" %}">LLM</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "B-ARCH" %}">B-ARCH</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "BBA-HEM" %}">BBA-HEM</a>
-                    <a class="dropdown-item" href="{% url 'branch_material' "B-DES" %}">B-DES</a>
-                </div>
-            </div>
-            <div class="input-group-prepend ml-2" >
-                <button class="btn btn-primary btn-md m-0 px-3 py-2 z-depth-0 dropdown-toggle" type="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Semester</button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'semester_material' 1 %}">1</a>
-                    <a class="dropdown-item" href="{% url 'semester_material' 2 %}">2</a>
-                    <a class="dropdown-item" href="{% url 'semester_material' 3 %}">3</a>
-                    <a class="dropdown-item" href="{% url 'semester_material' 4 %}">4</a>
-                    <a class="dropdown-item" href="{% url 'semester_material' 5 %}">5</a>
-                    <a class="dropdown-item" href="{% url 'semester_material' 6 %}">6</a>
-                    <a class="dropdown-item" href="{% url 'semester_material' 7 %}">7</a>
-                    <a class="dropdown-item" href="{% url 'semester_material' 8 %}">8</a>
 
-
-
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</div>
 <br>
     <!--Grid row-->
     <div class="row mb-4 wow fadeIn">
@@ -74,7 +27,6 @@
                     <!--Title-->
                     <h4 class="card-title">{{post.title}}</h4>
                     <!--Text-->
-                    <p class="card-text">{{post.description}}</p>
                     <a href="{% url 'material' post.id %}" class=" btn btn-primary btn-md">View folder
                         <i class="fas fa-folder ml-2"></i>
                     </a>
@@ -83,6 +35,7 @@
                                         {{post.date_posted|date:"M d Y"}}</p>
 
                 </div>
+                
 
             </div>
             <!--/.Card-->

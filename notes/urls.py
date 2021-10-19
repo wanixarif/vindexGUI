@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from .views import *
+from django.conf.urls import url
 
 urlpatterns = [
     path('', Posts.as_view(), name='index'),
@@ -37,7 +38,7 @@ urlpatterns = [
     path("notes/material/<int:pk>/update",
          FilePostUpdateView.as_view(), name="material_update"),
 
-
+    url(r'^ajax/getTimestamp/$', getTimestamp, name='getTimestamp'),
 #     path("notes/fullpost/<int:pk>/delete",
 #          PostDeleteView.as_view(), name="delete"),
     path("notes/material/<int:pk>/delete",

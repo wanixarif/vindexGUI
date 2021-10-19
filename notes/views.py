@@ -7,7 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-
+from .vindex import getSubTimeStamp
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -78,16 +79,14 @@ class FilePostCreateView(LoginRequiredMixin, CreateView):  # LoginRequiredMixin,
         "title",
        
         "file0",
-        "file1",
-        "file2",
-        "file3",
-        "file4",
-        "file5",
-        "file6",
-
-
+        # "file1",
+        # "file2",
+        # "file3",
+        # "file4",
+        # "file5",
+        # "file6",
     ]
-
+    
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -158,17 +157,17 @@ class FilePostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = [
 
         "title",
-        "description",
-        "semester",
-        "stream",
-        "subject",
+        # "description",
+        # "semester",
+        # "stream",
+        # "subject",
         "file0",
-        "file1",
-        "file2",
-        "file3",
-        "file4",
-        "file5",
-        "file6",
+        # "file1",
+        # "file2",
+        # "file3",
+        # "file4",
+        # "file5",
+        # "file6",
 
 
     ]
@@ -256,3 +255,13 @@ class BranchMaterialListView(ListView):
     def get_queryset(self):
 
         return FilePost.objects.filter(stream=self.kwargs.get('branch').upper()).order_by('-date_posted')
+
+
+
+def getTimestamp(request):
+    fileName = request.GET.get('fileName', None)
+    searchTerm = request.GET.get('searchTerm', None)
+    data = {
+        'is_taken': getSubTimeStamp(fileName,searchTerm)
+    }
+    return JsonResponse(data)
