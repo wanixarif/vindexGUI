@@ -30,7 +30,7 @@
                              style="color:white ;background-color : green;width:0px;height:20px;"> 100% Rendered</div>
                      </div>
                      <button class="btn btn-primary btn-rounded btn-block z-depth-0 my-4 waves-effect"
-                         type="submit">POST</button>
+                         type="submit" id="btn_upload_and_generate">Vindex it!</button>
                  </form>
              </div>
 
@@ -42,6 +42,15 @@
 
 
  </section>
+ <script>
+     $("#btn_upload_and_generate").click(
+        function () {
+            var tag="&nbsp;<span class=\"spinner-grow spinner-grow-sm\" role=\"status\" aria-hidden=\"true\"></span>&nbsp;&nbsp;&nbsp;&nbsp;".repeat(5)
+            console.log(tag)
+         $(this).html(tag+"This may take a while, please wait&nbsp;&nbsp;&nbsp;&nbsp;"+tag)
+        }
+     )
+ </script>
 
 
  {% endblock %}
