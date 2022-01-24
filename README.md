@@ -58,7 +58,7 @@ Requires Python >=3 to run.
 Clone this repo
 
 ```sh
-git clone https://github.com/wanixarif/kickStarter
+git clone https://github.com/wanixarif/vindexGUI
 ```
 
 Install the dependencies & start the developmental server.
