@@ -64,7 +64,7 @@ git clone https://github.com/wanixarif/vindexGUI
 Install the dependencies & start the developmental server.
 
 ```sh
-cd kickStarter
+cd vindexGUI
 pip install -r requirements.txt
 ```
 
